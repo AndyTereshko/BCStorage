@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dialog_barcode"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/dialog_barcode_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="34534534"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dialog_name"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/dialog_name_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/name_hint"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dialog_location"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/dialog_location_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/location_hint"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dialog_quantity"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/dialog_quantity_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/quantity_hint"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/alert_ok"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="@string/button_OK" />
+
+        <Button
+            android:id="@+id/alert_cancel"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="@string/button_cancel" />
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.petproject.andy.bcstorage.MainActivity">
+    <item
+        android:id="@+id/action_new_record_manually"
+        android:orderInCategory="100"
+        android:title="@string/action_new_record_manually"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_new_record_scan"
+        android:orderInCategory="100"
+        android:title="@string/action_new_record_scanning"
+        app:showAsAction="never" />
+</menu>

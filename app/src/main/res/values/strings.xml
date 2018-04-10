@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">BCStorage</string>
+    <string name="action_new_record_manually">Add manually</string>
+    <string name="action_new_record_scanning">Add by scanning</string>
+    <string name="ask_for_camera_permission">Please grant camera permission to use the Scanner</string>
+    <string name="button_OK">OK</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="alert_found">Found bar code </string>
+    <string name="alert_end"> with type </string>
+    <string name="alert_question">Do you want to insert?</string>
+    <string name="simple_scanner_activity">Scanner</string>
+    <string name="new_record_btn">Add new</string>
+    <string name="dialog_barcode">Barcode:</string>
+    <string name="dialog_name">Name:</string>
+    <string name="dialog_location">Location:</string>
+    <string name="dialog_quantity">Quantity:</string>
+    <string name="result_activity_title">Result</string>
+    <string name="dialog_barcode_manually">Enter barcode:</string>
+    <string name="id">ID</string>
+    <string name="barcode">Barcode</string>
+    <string name="name">Name</string>
+    <string name="location">Location</string>
+    <string name="quantity">Qty</string>
+    <string name="name_hint">Headphones</string>
+    <string name="location_hint">Storage A</string>
+    <string name="quantity_hint">4</string>
+</resources>
