@@ -68,7 +68,7 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
          */
 
         MyButtonClickListener(String action, AlertDialog dialog, String resultBarcode){
-            super();
+
             this.action = action;
             this.dialog = dialog;
             this.resultBarcode = resultBarcode;

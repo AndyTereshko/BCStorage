@@ -15,18 +15,19 @@ public class BarcodeRepository
 
     private static final String INSERT_COMMAND = "insert";
     private static final String DELETE_COMMAND = "delete";
+    private static final String UPDATE_COMMAND = "update";
     private BarcodeDAO mBarcodeDao;
     private LiveData<List<Barcode>> mAllBarcodes;
 
 
-    public BarcodeRepository(Application application){
+    BarcodeRepository(Application application){
         BarcodeRoomDatabase db = BarcodeRoomDatabase.getDatabase(application);
         mBarcodeDao = db.barcodeDAO();
         mAllBarcodes = mBarcodeDao.getAllBarcodes();
 
 
     }
-
+    //TODO: Make async
     public LiveData<List<Barcode>> getAllBarcodes(){
         return mAllBarcodes;
     }
@@ -35,19 +36,23 @@ public class BarcodeRepository
     }
 
     public void insert (Barcode barcode) {
-        new asyncTask(mBarcodeDao, INSERT_COMMAND).execute(barcode);
+        new DBAsyncTask(mBarcodeDao, INSERT_COMMAND).execute(barcode);
     }
-
+    //TODO: implement
     public void delete (Barcode barcode) {
-        new asyncTask(mBarcodeDao, DELETE_COMMAND).execute(barcode);
+        new DBAsyncTask(mBarcodeDao, DELETE_COMMAND).execute(barcode);
     }
 
-    private static class asyncTask extends AsyncTask<Barcode, Void, Void> {
+    public void update (Barcode barcode) {
+        new DBAsyncTask(mBarcodeDao, UPDATE_COMMAND).execute(barcode);
+    }
+
+    private static class DBAsyncTask extends AsyncTask<Barcode, Void, Void> {
 
         private BarcodeDAO mAsyncTaskDao;
         private String command;
 
-        asyncTask(BarcodeDAO dao, String command) {
+        DBAsyncTask(BarcodeDAO dao, String command) {
             mAsyncTaskDao = dao;
             this.command = command;
         }
@@ -60,6 +65,9 @@ public class BarcodeRepository
                     break;
                 case DELETE_COMMAND:
                     mAsyncTaskDao.delete(params[0]);
+                    break;
+                case UPDATE_COMMAND:
+                    mAsyncTaskDao.update(params[0]);
                     break;
             }
 

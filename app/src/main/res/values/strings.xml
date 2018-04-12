@@ -24,4 +24,5 @@
     <string name="name_hint">Headphones</string>
     <string name="location_hint">Storage A</string>
     <string name="quantity_hint">4</string>
+    <string name="barcode_hint">2342342343</string>
 </resources>

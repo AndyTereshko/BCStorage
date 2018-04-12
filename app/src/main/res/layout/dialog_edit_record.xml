@@ -20,7 +20,8 @@
         android:id="@+id/dialog_barcode_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="34534534"/>
+        android:inputType="text"
+        android:hint="@string/barcode_hint"/>
 
     </LinearLayout>
 
@@ -40,6 +41,7 @@
             android:id="@+id/dialog_name_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="text"
             android:hint="@string/name_hint"/>
 
     </LinearLayout>
@@ -60,6 +62,7 @@
             android:id="@+id/dialog_location_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="text"
             android:hint="@string/location_hint"/>
 
     </LinearLayout>
@@ -80,7 +83,8 @@
             android:id="@+id/dialog_quantity_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/quantity_hint"/>
+            android:hint="@string/quantity_hint"
+            android:inputType="number"/>
 
     </LinearLayout>
     <LinearLayout

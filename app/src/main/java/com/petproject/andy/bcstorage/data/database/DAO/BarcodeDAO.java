@@ -6,6 +6,7 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
+import android.arch.persistence.room.Update;
 
 import com.petproject.andy.bcstorage.data.database.Barcode;
 
@@ -25,6 +26,12 @@ public interface BarcodeDAO {
 
     @Query("SELECT * FROM Barcode WHERE barcode = :specificBarcode")
     LiveData<List<Barcode>> getSpecificBarcodes(String specificBarcode);
+
+    @Update
+    void update(Barcode barcode);
+
+  /*  @Query("UPDATE Barcode SET Barcode=:barcode.barcode  WHERE id=:barcode.id")
+    void update(long id, String );*/
 
 
 }

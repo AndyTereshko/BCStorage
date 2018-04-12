@@ -28,4 +28,5 @@ public class BarcodeViewModel extends AndroidViewModel {
 
     public void insert(Barcode barcode) { mRepository.insert(barcode); }
     public void delete(Barcode barcode) { mRepository.delete(barcode); }
+    public void update(Barcode barcode) { mRepository.update(barcode); }
 }

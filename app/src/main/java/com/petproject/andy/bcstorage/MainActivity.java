@@ -7,6 +7,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -34,12 +35,12 @@ import java.util.List;
 
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements BarcodeAdapter.BarcodeAdapterOnClickHandler {
 
 
     private static final int ZXING_CAMERA_PERMISSION = 1;
     private Class<?> mClss;
-
+    BarcodeViewModel mBarcodeViewModel;
 
 
 
@@ -52,13 +53,13 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
-        final BarcodeAdapter barcodeAdapter = new BarcodeAdapter(this);
+        final BarcodeAdapter barcodeAdapter = new BarcodeAdapter(this, this);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(barcodeAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // Get a new or existing ViewModel from the ViewModelProvider.
-        BarcodeViewModel mBarcodeViewModel = ViewModelProviders.of(this).get(BarcodeViewModel.class);
+        mBarcodeViewModel = ViewModelProviders.of(this).get(BarcodeViewModel.class);
 
         // Add an observer on the LiveData returned by getBarcodes.
         // The onChanged() method fires when the observed data changes and the activity is
@@ -101,20 +102,26 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onClick(Barcode barcode) {
+        barcode.quantity+=1;
+        mBarcodeViewModel.update(barcode);
+    }
+
     private class MyButtonClickListener implements View.OnClickListener {
         private String action;
         private AlertDialog dialog;
         private EditText enteredManuallyBarcode_et;
 
         /**
-         *
+         * Custom click listener class
          * @param action ok or cancel button
          * @param dialog reference for opened dialog
          * @param enteredManuallyBarcode_et barcode manually entered
          */
 
         MyButtonClickListener(String action, AlertDialog dialog, EditText enteredManuallyBarcode_et){
-            super();
+
             this.action = action;
             this.dialog = dialog;
             this.enteredManuallyBarcode_et = enteredManuallyBarcode_et;
@@ -134,6 +141,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Showing alert dialog to manually get barcode and then send it to ResultActivity.
+     */
+
     private void showBarcodeManuallyDialog(){
         final AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
         View mView = getLayoutInflater().inflate(R.layout.dialog_barcode_manually,null);
@@ -150,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Checking for camera permission.
-     * @param clss
+     * @param clss activity class
      */
 
     public void launchActivity(Class<?> clss) {
@@ -166,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,  String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
         switch (requestCode) {
             case ZXING_CAMERA_PERMISSION:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -178,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(this, getString(R.string.ask_for_camera_permission),
                             Toast.LENGTH_SHORT).show();
                 }
-                return;
+
         }
     }
 }

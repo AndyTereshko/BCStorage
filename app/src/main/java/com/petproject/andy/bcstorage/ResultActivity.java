@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,10 +22,11 @@ import com.petproject.andy.bcstorage.utils.StringUtils;
 
 import java.util.List;
 
-public class ResultActivity extends AppCompatActivity {
+public class ResultActivity extends AppCompatActivity implements BarcodeAdapter.BarcodeAdapterOnClickHandler{
 
     private BarcodeViewModel mBarcodeViewModel;
     String specificBarcode;
+    private static final String TAG = "ResultActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +34,7 @@ public class ResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_result);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
-        final BarcodeAdapter barcodeAdapter = new BarcodeAdapter(this);
+        final BarcodeAdapter barcodeAdapter = new BarcodeAdapter(this, this);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(barcodeAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -55,17 +57,12 @@ public class ResultActivity extends AppCompatActivity {
             });
         }
 
-
-
-
-
-        /*Barcode barcode = new Barcode();
-
-        barcode.productName="eqweq";
-        barcode.location="rwerw";
-        barcode.quantity=1;
-        mBarcodeViewModel.insert(barcode);*/
     }
+
+    /**
+     * Showing dialog to add new record.
+     * @param view that was pressed
+     */
 
     public void onAddClick(View view){
         final AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
@@ -76,7 +73,7 @@ public class ResultActivity extends AppCompatActivity {
         final EditText barcode_quantity_et = mView.findViewById(R.id.dialog_quantity_et);
         Button alertOkButton = mView.findViewById(R.id.alert_ok);
         Button alertCancelButton = mView.findViewById(R.id.alert_cancel);
-        barcode_name_et.setText(specificBarcode);
+        barcode_et.setText(specificBarcode);
         mBuilder.setView(mView);
         final AlertDialog dialog = mBuilder.create();
         alertOkButton.setOnClickListener(new View.OnClickListener() {
@@ -86,8 +83,12 @@ public class ResultActivity extends AppCompatActivity {
                 barcodeToInsert.barcode = barcode_et.getText().toString();
                 barcodeToInsert.productName = barcode_name_et.getText().toString();
                 barcodeToInsert.location = barcode_location_et.getText().toString();
-                //TODO: check for exception
-                barcodeToInsert.quantity = Integer.parseInt(barcode_quantity_et.getText().toString());
+                try{
+                    barcodeToInsert.quantity = Integer.parseInt(barcode_quantity_et.getText().toString());
+                }
+                catch (NumberFormatException e){
+                    Log.d(TAG, e.toString());
+                }
                 mBarcodeViewModel.insert(barcodeToInsert);
                 dialog.cancel();
             }
@@ -101,4 +102,16 @@ public class ResultActivity extends AppCompatActivity {
         dialog.show();
 
     }
+
+    /**
+     * on recycler view item click increment quantity
+     * @param barcode which is being updated
+     */
+
+    @Override
+    public void onClick(Barcode barcode) {
+        barcode.quantity += 1;
+        mBarcodeViewModel.update(barcode);
+    }
+
 }
