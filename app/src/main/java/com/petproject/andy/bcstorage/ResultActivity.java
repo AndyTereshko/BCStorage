@@ -19,6 +19,7 @@ import android.widget.Toolbar;
 import com.petproject.andy.bcstorage.data.database.Barcode;
 import com.petproject.andy.bcstorage.data.BarcodeAdapter;
 import com.petproject.andy.bcstorage.data.BarcodeViewModel;
+import com.petproject.andy.bcstorage.utils.DialogUtils;
 import com.petproject.andy.bcstorage.utils.StringUtils;
 
 import java.util.List;
@@ -107,6 +108,7 @@ public class ResultActivity extends AppCompatActivity
             }
         });
         dialog.show();
+        DialogUtils.doKeepDialog(dialog); //keeps dialog after orientation change
 
     }
 
@@ -164,6 +166,7 @@ public class ResultActivity extends AppCompatActivity
             }
         });
         dialog.show();
+        DialogUtils.doKeepDialog(dialog); //keeps dialog after orientation change
     }
 
 

@@ -2,6 +2,7 @@ package com.petproject.andy.bcstorage;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
@@ -19,6 +20,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -28,6 +30,7 @@ import com.google.zxing.Result;
 import com.petproject.andy.bcstorage.data.BarcodeAdapter;
 import com.petproject.andy.bcstorage.data.database.Barcode;
 import com.petproject.andy.bcstorage.data.BarcodeViewModel;
+import com.petproject.andy.bcstorage.utils.DialogUtils;
 import com.petproject.andy.bcstorage.utils.StringUtils;
 
 import java.util.ArrayList;
@@ -106,6 +109,9 @@ public class MainActivity extends AppCompatActivity implements
 
         return super.onOptionsItemSelected(item);
     }
+
+
+
     private void showAssuranceDialog(){
         final AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
         View mView = getLayoutInflater().inflate(R.layout.dialog_delete_all,null);
@@ -123,6 +129,8 @@ public class MainActivity extends AppCompatActivity implements
         //closing dialog
         alertCancelButton.setOnClickListener(new MyButtonClickListener(StringUtils.CANCEL_ACTION,dialog,null));
         dialog.show();
+        DialogUtils.doKeepDialog(dialog); //keeps dialog after orientation change
+
     }
 
     @Override
@@ -174,6 +182,7 @@ public class MainActivity extends AppCompatActivity implements
             }
         });
         dialog.show();
+        DialogUtils.doKeepDialog(dialog); //keeps dialog after orientation change
     }
 
 

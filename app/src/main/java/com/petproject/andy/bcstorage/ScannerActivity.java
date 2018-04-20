@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.zxing.Result;
+import com.petproject.andy.bcstorage.utils.DialogUtils;
 import com.petproject.andy.bcstorage.utils.StringUtils;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
@@ -111,6 +112,7 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
         alertOkButton.setOnClickListener(new MyButtonClickListener(StringUtils.OK_ACTION,dialog,resultBarcode));
         alertCancelButton.setOnClickListener(new MyButtonClickListener(StringUtils.CANCEL_ACTION,dialog,null));
         dialog.show();
+        DialogUtils.doKeepDialog(dialog); //keeps dialog after orientation change
 
 
 
