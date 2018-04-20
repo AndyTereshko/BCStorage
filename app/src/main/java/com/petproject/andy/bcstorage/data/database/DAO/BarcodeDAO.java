@@ -30,8 +30,7 @@ public interface BarcodeDAO {
     @Update
     void update(Barcode barcode);
 
-  /*  @Query("UPDATE Barcode SET Barcode=:barcode.barcode  WHERE id=:barcode.id")
-    void update(long id, String );*/
-
+    @Query("DELETE FROM Barcode")
+    void deleteAll();
 
 }

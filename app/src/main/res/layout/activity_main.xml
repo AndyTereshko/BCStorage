@@ -13,73 +13,15 @@
         android:layout_height="wrap_content"
         android:background="@color/primary"
         custom:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        custom:title="@string/app_name" />
+        custom:title="@string/all_records" />
 
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <include
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
-
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/barcode_id_tv"
-                android:layout_width="25dp"
-                android:layout_height="wrap_content"
-                android:text="@string/id" />
-
-            <TextView
-                android:id="@+id/barcode_tv"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/barcode"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/barcode_name_tv"
-                app:layout_constraintStart_toEndOf="@+id/barcode_id_tv"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/barcode_name_tv"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/name"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/barcode_location_tv"
-                app:layout_constraintStart_toEndOf="@+id/barcode_tv"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/barcode_location_tv"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/location"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/barcode_quantity_tv"
-                app:layout_constraintStart_toEndOf="@+id/barcode_name_tv"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/barcode_quantity_tv"
-                android:layout_width="25dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="0dp"
-                android:layout_marginRight="0dp"
-
-                android:text="@string/quantity"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
-        </android.support.constraint.ConstraintLayout>
-
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        layout="@layout/header"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview"

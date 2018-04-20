@@ -20,9 +20,16 @@ public class BarcodeAdapter extends RecyclerView.Adapter<BarcodeAdapter.BarcodeV
     private List<Barcode> mBarcodes;
     private BarcodeAdapterOnClickHandler mClickHandler;
 
+
+    /**
+     * interface to handle clicks on recyclerview rows
+     */
+
     public interface BarcodeAdapterOnClickHandler{
         void onClick(Barcode barcode);
     }
+
+
 
 
     class BarcodeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -49,6 +56,8 @@ public class BarcodeAdapter extends RecyclerView.Adapter<BarcodeAdapter.BarcodeV
 
 
         }
+
+
     }
 
 
@@ -57,6 +66,7 @@ public class BarcodeAdapter extends RecyclerView.Adapter<BarcodeAdapter.BarcodeV
 
     public BarcodeAdapter(Context context, BarcodeAdapterOnClickHandler barcodeAdapterOnClickHandler) {
         mClickHandler = barcodeAdapterOnClickHandler;
+
         mLayoutInflater = LayoutInflater.from(context);
     }
 

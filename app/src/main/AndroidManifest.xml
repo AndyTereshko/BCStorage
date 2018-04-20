@@ -27,6 +27,7 @@
             android:label="@string/simple_scanner_activity"
             android:theme="@style/AppOverlayTheme" />
         <activity android:name=".ResultActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:label="@string/result_activity_title"/>
     </application>
 

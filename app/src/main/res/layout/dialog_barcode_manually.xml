@@ -14,8 +14,8 @@
         android:id="@+id/barcode_manually_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        android:hint="3242342"/>
+        android:inputType="text"
+        android:hint="@string/barcode_hint"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,16 +23,18 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/alert_cancel"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="@string/button_cancel" />
+
+        <Button
             android:id="@+id/alert_ok"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="@string/button_OK" />
 
-        <Button
-            android:id="@+id/alert_cancel"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="@string/button_cancel" />
+
     </LinearLayout>
 
 

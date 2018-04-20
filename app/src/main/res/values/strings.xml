@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">BCStorage</string>
-    <string name="action_new_record_manually">Add manually</string>
-    <string name="action_new_record_scanning">Add by scanning</string>
+    <string name="action_new_record_manually">Search manually</string>
+    <string name="action_new_record_scanning">Search by scanning</string>
     <string name="ask_for_camera_permission">Please grant camera permission to use the Scanner</string>
     <string name="button_OK">OK</string>
     <string name="button_cancel">Cancel</string>
@@ -25,4 +25,8 @@
     <string name="location_hint">Storage A</string>
     <string name="quantity_hint">4</string>
     <string name="barcode_hint">2342342343</string>
+    <string name="button_delete">Delete</string>
+    <string name="action_delete_all">Clean all data</string>
+    <string name="delete_all_question_assurance">Are you sure you want to clean all data?</string>
+    <string name="all_records">All data</string>
 </resources>

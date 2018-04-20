@@ -35,11 +35,13 @@ import java.util.List;
 
 
 
-public class MainActivity extends AppCompatActivity implements BarcodeAdapter.BarcodeAdapterOnClickHandler {
+public class MainActivity extends AppCompatActivity implements
+        BarcodeAdapter.BarcodeAdapterOnClickHandler{
 
 
     private static final int ZXING_CAMERA_PERMISSION = 1;
     private Class<?> mClss;
+    private static final String TAG = "MainActivity";
     BarcodeViewModel mBarcodeViewModel;
 
 
@@ -97,16 +99,83 @@ public class MainActivity extends AppCompatActivity implements BarcodeAdapter.Ba
             case R.id.action_new_record_scan:
                 launchActivity(ScannerActivity.class);
                 break;
+            case R.id.action_delete_all:
+                showAssuranceDialog();
+                break;
         }
 
         return super.onOptionsItemSelected(item);
     }
+    private void showAssuranceDialog(){
+        final AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
+        View mView = getLayoutInflater().inflate(R.layout.dialog_delete_all,null);
+        Button alertOkButton = mView.findViewById(R.id.alert_ok);
+        Button alertCancelButton = mView.findViewById(R.id.alert_cancel);
+        mBuilder.setView(mView);
+        final AlertDialog dialog = mBuilder.create();
+        alertOkButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mBarcodeViewModel.deleteAll();
+                dialog.cancel();
+            }
+        });
+        //closing dialog
+        alertCancelButton.setOnClickListener(new MyButtonClickListener(StringUtils.CANCEL_ACTION,dialog,null));
+        dialog.show();
+    }
 
     @Override
-    public void onClick(Barcode barcode) {
-        barcode.quantity+=1;
-        mBarcodeViewModel.update(barcode);
+    public void onClick(final Barcode barcode) {
+        final AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
+        View mView = getLayoutInflater().inflate(R.layout.dialog_edit_record,null);
+        final EditText barcode_et = mView.findViewById(R.id.dialog_barcode_et);
+        final EditText barcode_name_et = mView.findViewById(R.id.dialog_name_et);
+        final EditText barcode_location_et = mView.findViewById(R.id.dialog_location_et);
+        final EditText barcode_quantity_et = mView.findViewById(R.id.dialog_quantity_et);
+        Button alertOkButton = mView.findViewById(R.id.alert_ok);
+        Button alertCancelButton = mView.findViewById(R.id.alert_cancel);
+        Button deleteButton = mView.findViewById(R.id.dialog_delete_button);
+        deleteButton.setVisibility(View.VISIBLE); //showing delete button
+        mBuilder.setView(mView);
+        barcode_et.setText(barcode.barcode);
+        barcode_name_et.setText(barcode.productName);
+        barcode_location_et.setText(barcode.location);
+        barcode_quantity_et.setText(Integer.toString(barcode.quantity));
+        final AlertDialog dialog = mBuilder.create();
+        alertOkButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                barcode.barcode = barcode_et.getText().toString();
+                barcode.productName = barcode_name_et.getText().toString();
+                barcode.location = barcode_location_et.getText().toString();
+                try{
+                    barcode.quantity = Integer.parseInt(barcode_quantity_et.getText().toString());
+                }
+                catch (NumberFormatException e){
+                    Log.d(TAG, e.toString());
+                }
+                mBarcodeViewModel.update(barcode);
+                dialog.cancel();
+            }
+        });
+        alertCancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+            }
+        });
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                mBarcodeViewModel.delete(barcode);
+                dialog.cancel();
+            }
+        });
+        dialog.show();
     }
+
 
     private class MyButtonClickListener implements View.OnClickListener {
         private String action;
@@ -129,13 +198,13 @@ public class MainActivity extends AppCompatActivity implements BarcodeAdapter.Ba
 
         @Override
         public void onClick(View v) {
-            if(action.equals(StringUtils.OK_ACTION)){
+            if(action.equals(StringUtils.OK_ACTION)){ //passing barcode to ResultActivity
                 Intent i = new Intent(MainActivity.this, ResultActivity.class);
                 String enteredManuallyBarcode = enteredManuallyBarcode_et.getText().toString();
                 i.putExtra(StringUtils.PASSED_BARCODE, enteredManuallyBarcode);
                 startActivity(i);
             }
-            dialog.cancel();
+            dialog.cancel(); // closing dialog
 
 
         }

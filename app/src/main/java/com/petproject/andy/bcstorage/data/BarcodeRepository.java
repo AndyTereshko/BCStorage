@@ -15,6 +15,7 @@ public class BarcodeRepository
 
     private static final String INSERT_COMMAND = "insert";
     private static final String DELETE_COMMAND = "delete";
+    private static final String DELETE_ALL_COMMAND = "delete-all";
     private static final String UPDATE_COMMAND = "update";
     private BarcodeDAO mBarcodeDao;
     private LiveData<List<Barcode>> mAllBarcodes;
@@ -38,7 +39,11 @@ public class BarcodeRepository
     public void insert (Barcode barcode) {
         new DBAsyncTask(mBarcodeDao, INSERT_COMMAND).execute(barcode);
     }
-    //TODO: implement
+
+    public void deleteAll(){
+        new DBAsyncTask(mBarcodeDao, DELETE_ALL_COMMAND).execute();
+    }
+
     public void delete (Barcode barcode) {
         new DBAsyncTask(mBarcodeDao, DELETE_COMMAND).execute(barcode);
     }
@@ -69,6 +74,8 @@ public class BarcodeRepository
                 case UPDATE_COMMAND:
                     mAsyncTaskDao.update(params[0]);
                     break;
+                case DELETE_ALL_COMMAND:
+                    mAsyncTaskDao.deleteAll();
             }
 
             return null;

@@ -5,10 +5,10 @@
     android:padding="5dp">
 
     <TextView
-        android:id="@+id/alert_dialog_tv"
+        android:id="@+id/alert_dialog_delete_all_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=""
+        android:text="@string/delete_all_question_assurance"
         android:textSize="20sp"/>
 
     <LinearLayout

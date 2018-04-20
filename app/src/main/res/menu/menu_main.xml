@@ -12,4 +12,9 @@
         android:orderInCategory="100"
         android:title="@string/action_new_record_scanning"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_delete_all"
+        android:orderInCategory="100"
+        android:title="@string/action_delete_all"
+        app:showAsAction="never" />
 </menu>
