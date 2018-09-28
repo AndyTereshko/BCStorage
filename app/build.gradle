@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 27
@@ -27,12 +29,16 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     annotationProcessor "android.arch.lifecycle:compiler:$rootProject.archLifycycleCompilerVserion"
     implementation "android.arch.persistence.room:runtime:$rootProject.roomVersion"
-    annotationProcessor "android.arch.persistence.room:compiler:$rootProject.roomVersionCompiler"
+    kapt "android.arch.persistence.room:compiler:$rootProject.roomVersionCompiler"
     implementation "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
     implementation "com.android.support.constraint:constraint-layout:$rootProject.constraintLayoutVersion"
     testImplementation "junit:junit:$rootProject.junitVersion"
     androidTestImplementation "com.android.support.test:runner:$rootProject.testRunnerVersion"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$rootProject.espressoVersion"
     implementation "me.dm7.barcodescanner:zxing:$rootProject.zxingVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+}
+repositories {
+    mavenCentral()
 }
